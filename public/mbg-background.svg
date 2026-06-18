@@ -1,0 +1,22 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC" />
+      <stop offset="1" stop-color="#EFF6FF" />
+    </linearGradient>
+    <linearGradient id="shapeGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#60A5FA" stop-opacity="0.12" />
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bgGradient)" />
+  <circle cx="1520" cy="220" r="240" fill="url(#shapeGradient)" />
+  <circle cx="320" cy="860" r="300" fill="url(#shapeGradient)" />
+  <rect x="960" y="520" width="360" height="360" rx="40" fill="url(#shapeGradient)" />
+  <path d="M820 180C820 150.49 844.49 126 873 126H1033C1061.51 126 1086 150.49 1086 180V300C1086 328.51 1061.51 353 1033 353H873C844.49 353 820 328.51 820 300V180Z" fill="#BFDBFE" opacity="0.45" />
+  <path d="M1320 300C1320 257.06 1358.06 219 1401 219H1539C1581.94 219 1620 257.06 1620 300V420C1620 462.94 1581.94 501 1539 501H1401C1358.06 501 1320 462.94 1320 420V300Z" fill="#BFDBFE" opacity="0.4" />
+  <text x="50%" y="70%" text-anchor="middle" fill="#1D4ED8" font-size="180" font-weight="800" opacity="0.08" font-family="Inter, sans-serif">MBG</text>
+  <text x="50%" y="80%" text-anchor="middle" fill="#1D4ED8" font-size="48" font-weight="600" opacity="0.08" font-family="Inter, sans-serif">Manajemen Bahan Gudang</text>
+  <path d="M180 200H520" stroke="#93C5FD" stroke-width="8" stroke-linecap="round" opacity="0.4" />
+  <path d="M1880 860H1440" stroke="#93C5FD" stroke-width="8" stroke-linecap="round" opacity="0.4" />
+</svg>
