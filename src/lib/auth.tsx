@@ -40,16 +40,44 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
+    console.log('Login attempt:', { username, SUPABASE_ENABLED });
+    
     if (SUPABASE_ENABLED) {
+      console.log('Trying Supabase auth...');
+      
+      // First, check all users in table
+      const { data: allUsers, error: allError } = await supabase
+        .from('users')
+        .select('*');
+      console.log('All users in database:', { allUsers, allError });
+      
+      // Now try to find specific user
       const { data, error } = await supabase
         .from('users')
         .select('*')
         .ilike('username', username)
         .single();
 
-      if (error || !data) return false;
+      console.log('Supabase query result:', { data, error });
+      if (error) {
+        console.error('Supabase error details:', {
+          message: error.message,
+          status: (error as any).status,
+          statusText: (error as any).statusText,
+          hint: (error as any).hint,
+          details: (error as any).details
+        });
+      }
+
+      if (error || !data) {
+        console.log('Supabase query failed, returning false');
+        return false;
+      }
+      
       const userData = data as User;
       const ok = await bcrypt.compare(password, userData.password);
+      console.log('Password match:', ok);
+      
       if (!ok) return false;
 
       setUser(data);
