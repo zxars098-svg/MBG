@@ -71,3 +71,45 @@ export default defineConfig([
   },
 ])
 ```
+
+## Supabase and Vercel setup
+
+This project is now configured to support Supabase as an authentication data source.
+
+### 1. Add environment variables
+Create a file named `.env.local` in the project root and add:
+
+```env
+VITE_SUPABASE_URL=https://jhfeycewyxwyvtxpmfai.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+> `.env.local` is ignored by Git and should not be committed.
+
+### 2. Supabase table requirements
+Create a `users` table in Supabase with at least these columns:
+
+- `id` (integer, primary key)
+- `username` (text)
+- `password` (text, bcrypt hash)
+- `nama` (text)
+- `role` (text)
+
+The app uses this table for login when Supabase is enabled.
+
+### 3. Run locally
+Install dependencies and start the app:
+
+```bash
+npm install
+npm run dev
+```
+
+### 4. Deploy to Vercel
+1. Connect your GitHub repo to Vercel.
+2. Add environment variables in Vercel:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+3. Deploy.
+
+With this setup, the app will use Supabase for authentication and still run locally with the current Vite + React configuration.

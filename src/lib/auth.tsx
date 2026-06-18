@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import bcrypt from 'bcryptjs';
 import type { Database, User } from './types';
 import { initDatabase, saveDatabase } from './db';
+import { supabase, SUPABASE_ENABLED } from './supabase';
 
 interface AuthState {
   user: User | null;
@@ -39,6 +40,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string): Promise<boolean> => {
+    if (SUPABASE_ENABLED) {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .ilike('username', username)
+        .single();
+
+      if (error || !data) return false;
+      const userData = data as User;
+      const ok = await bcrypt.compare(password, userData.password);
+      if (!ok) return false;
+
+      setUser(data);
+      sessionStorage.setItem(SESSION_KEY, String(data.id));
+      addAuditInternal(data.username, 'Login', 'Auth', 'Login berhasil');
+      return true;
+    }
+
     if (!db) return false;
     const found = db.users.find((u) => u.username.toLowerCase() === username.toLowerCase());
     if (!found) return false;
